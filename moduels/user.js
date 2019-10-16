@@ -1,9 +1,9 @@
 var Sequelize = require('sequelize');
 var sequelize = require('../db');
- 
+
 // 创建 model
 var User = sequelize.define('user', {
-    userName: {
+    username: {
         type: Sequelize.STRING, // 指定值的类型
         field: 'userName' // 指定存储在表中的键名称
     },
@@ -21,11 +21,11 @@ var User = sequelize.define('user', {
     // 如果指定的表名称本就是复数形式则不变
     freezeTableName: false
 });
- 
+
 // 创建表
 // User.sync() 会创建表并且返回一个Promise对象
 // 如果 force = true 则会把存在的表（如果users表已存在）先销毁再创建表
 
-var user = User.sync({ force: false });
+var user = User.sync({ force: true });
 
 module.exports = User

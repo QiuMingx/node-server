@@ -6,6 +6,7 @@ router.get('/',ctrls.User.findAll);
 
 router.post('/login',ctrls.User.login);
 router.post('/existsMobile',ctrls.User.existsMobile);
+router.post('/register',ctrls.User.register);
 
 module.exports = router;
 
