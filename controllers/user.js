@@ -13,8 +13,11 @@ module.exports = {
             // },
             password:password
         }
-        console.log(param)
         User.findOne({where:param}).then(r=>{
+            if (!r) {
+                res.send(Until.setResult(2,'用户名或密码错误', r))
+                return
+            }
             console.log(r)
             res.send(Until.setResult(200,'success', Until.setToken(r)))
         }).catch(err=>{
@@ -30,11 +33,18 @@ module.exports = {
 //         email: email
 //     });
 // };
- 
-// // 通过用户名查找用户
-// exports.findByName = function(userName) {
-//     return User.findOne({ where: { user_name: userName } });
-// };
+
+    // 通过用户名查找用户
+    existsMobile :function(req, res, next) {
+        let username = req.body.username,flag;
+        User.findOne({ where: { username: username } })
+        .then(r=>{
+          flag = r ? true : false;
+          res.send({"result":true,"value":flag})
+        }).catch(err=>{
+            res.send(Until.setResult(500,'error',err))
+        })
+    },
 
 // 通过用户名查找用户
     findAll : function(req, res, next) {
